@@ -9,6 +9,10 @@ public class Intitule {
     private String intitule;
     private Long id;
 
+    public Intitule(String intitule) {
+        this.intitule = intitule;
+    }
+
     @Id
     @GeneratedValue
     public Long getId() {

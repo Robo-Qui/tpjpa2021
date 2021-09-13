@@ -29,6 +29,22 @@ public class Compte {
         this.Id = id;
     }
 
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String ToString(){
         return String.format("Compte, login:%s password:%s",this.login,this.password);
     }

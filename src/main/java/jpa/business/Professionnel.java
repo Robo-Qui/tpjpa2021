@@ -12,7 +12,8 @@ public class Professionnel extends Compte{
     RdvInfos infoRdv;
     List<FreeSlot> freeSlots;
 
-    public Professionnel(String name){
+    public Professionnel(String log, String pass,String name){
+        super(log,pass);
         this.name = name;
     }
 
