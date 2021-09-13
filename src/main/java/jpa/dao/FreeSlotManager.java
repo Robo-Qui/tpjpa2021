@@ -1,5 +1,7 @@
 package jpa.dao;
 
-public class FreeSlotManager extends GenericManager {
+import jpa.business.FreeSlot;
+
+public class FreeSlotManager extends GenericManager<FreeSlot, Long> {
 
 }
