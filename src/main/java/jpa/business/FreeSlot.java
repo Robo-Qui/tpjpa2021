@@ -11,6 +11,14 @@ public class FreeSlot {
     private Date endTime;
     private Long id;
 
+    public FreeSlot() {
+    }
+
+    public FreeSlot(Date startTime, Date endTime) {
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
+
     @Id
     @GeneratedValue
     public Long getId() {

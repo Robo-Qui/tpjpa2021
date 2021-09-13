@@ -66,6 +66,14 @@ public class JpaTest {
 		}
 		tx.commit();
 
+		Professionnel prof = (new ProfessionnelManager().getProfessionnelById(4L));
+		if(prof != null){
+			System.out.println(prof);
+		}
+		else{
+			System.out.println("No user was found");
+		}
+
 		test.manager.close();
 		EntityManagerHelper.closeEntityManagerFactory();
 		//		factory.close();

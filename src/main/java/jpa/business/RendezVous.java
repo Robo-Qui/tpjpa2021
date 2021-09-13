@@ -14,6 +14,9 @@ public class RendezVous {
     private Date endTime;
     private Long id;
 
+    public RendezVous() {
+    }
+
     public RendezVous(Professionnel prof, Utilisateur client, Date startTime, Date endTime) {
         this.prof = prof;
         this.client = client;

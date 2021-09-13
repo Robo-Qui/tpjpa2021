@@ -9,6 +9,9 @@ public class Intitule {
     private String intitule;
     private Long id;
 
+    public Intitule() {
+    }
+
     public Intitule(String intitule) {
         this.intitule = intitule;
     }
@@ -29,5 +32,9 @@ public class Intitule {
 
     public void setIntitule(String inti){
         this.intitule = inti;
+    }
+
+    public String toString(){
+        return this.intitule;
     }
 }

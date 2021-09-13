@@ -12,7 +12,11 @@ public class Professionnel extends Compte{
     RdvInfos infoRdv;
     List<FreeSlot> freeSlots;
 
-    public Professionnel(String log, String pass,String name){
+    public Professionnel() {
+        super();
+    }
+
+    public Professionnel(String log, String pass, String name){
         super(log,pass);
         this.name = name;
     }
@@ -44,9 +48,19 @@ public class Professionnel extends Compte{
     }
 
     @Override
-    public String ToString(){
-        return String.format("Profesionnel %s, Durée de RDV: %s, Motifs de RDV %s\n Créneaux disponibles %s",
-                this.name,this.infoRdv.getDuree(),this.infoRdv.getIntitules(),this.freeSlots
+    public String toString(){
+        return String.format("Profesionnel %s, Durée de RDV: %s\nMotifs de RDV %s\nCréneaux disponibles %s",
+                this.name,this.infoRdv.getDuree(),
+                IntiList(this.getRdvInfos().getIntitules()),
+                this.freeSlots
         );
+    }
+
+    private String IntiList(List<Intitule> intitules){
+        String res = "Liste des intitulés:";
+        for(Intitule intitule : intitules){
+            res = String.format("%s\n%s",res,intitule.toString());
+        }
+        return res;
     }
 }

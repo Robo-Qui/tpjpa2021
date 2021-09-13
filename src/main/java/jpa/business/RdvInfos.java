@@ -9,6 +9,9 @@ public class RdvInfos {
     private List<Intitule> intitules;
     private Long id;
 
+    public RdvInfos() {
+    }
+
     public RdvInfos(int duree, List<Intitule> intitules) {
         this.duree = duree;
         this.intitules = intitules;

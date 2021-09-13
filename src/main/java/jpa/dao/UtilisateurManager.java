@@ -1,11 +1,12 @@
 package jpa.dao;
 
-import jpa.EntityManagerHelper;
+import jpa.business.Compte;
 import jpa.business.Utilisateur;
-import org.hibernate.cache.spi.FilterKey;
 
-import javax.persistence.EntityManager;
+import javax.persistence.criteria.*;
 
 public class UtilisateurManager extends GenericManager<Utilisateur, Long> {
-
+    public Utilisateur getUtilisateurById(Long id){
+        return (Utilisateur) (new CompteManager()).getCompteById(id,Utilisateur.class);
+    }
 }
