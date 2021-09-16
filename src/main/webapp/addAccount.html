@@ -1,0 +1,29 @@
+<html>
+<SCRIPT>
+    function handleName(){
+        var dropdown = document.getElementById('type');
+        var name = document.getElementById('name');
+        if(dropdown.value === "Professionnel"){
+            name.style.display = "block";
+        }
+        else{
+            name.style.display = "none";
+        }
+    }
+</SCRIPT>
+<body>
+<FORM Method="POST" Action="/addAccount">
+    Type :
+    <SELECT id="type" name="type" onchange="javascript: handleName()">
+        <OPTION value="Professionnel"> Professionnel </OPTION>
+        <OPTION value="Utilisateur"> Utilisateur </OPTION>
+    </SELECT><br>
+    Login : 	<INPUT type="text" size="20" name="login"><BR>
+    Password : 	<INPUT type="text" size=20" name="password"><br>
+    <div id="name" aria-hidden="true">
+        Name : <input type="text" size="20" name="name"><br>
+    </div>
+    <INPUT type=submit value=Send>
+</FORM>
+</body>
+</html>

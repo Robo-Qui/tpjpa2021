@@ -66,7 +66,7 @@ public class JpaTest {
 		}
 		tx.commit();
 
-		Professionnel prof = (new ProfessionnelManager().getProfessionnelById(4L));
+		Professionnel prof = (new ProfessionnelManager().getProfessionnelByLogin("prof"));
 		if(prof != null){
 			System.out.println(prof);
 		}
