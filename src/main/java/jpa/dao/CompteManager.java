@@ -17,4 +17,16 @@ public class CompteManager extends GenericManager<Compte, Long>{
             return null;
         }
     }
+
+    public Compte getCompteByLogin(String login, Class resultClass){
+        try {
+            String query = String.format("SELECT a FROM Compte a WHERE DTYPE=%s AND login=%s",
+                    resultClass.getName(),
+                    login);
+            return entityManager.createQuery(query, Compte.class).getSingleResult();
+        }
+        catch(NoResultException e){
+            return null;
+        }
+    }
 }

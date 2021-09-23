@@ -1,10 +1,7 @@
 package jpa;
 
 import jpa.business.*;
-import jpa.dao.IntituleManager;
-import jpa.dao.ProfessionnelManager;
-import jpa.dao.RdvInfosManager;
-import jpa.dao.UtilisateurManager;
+import jpa.dao.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -26,7 +23,7 @@ public class JpaTest {
 		String query = "Select a From Compte a Where DTYPE='Utilisateur'";
 		int numUtilisateurs = manager.createQuery(query, Compte.class).getResultList().size();
 		if(numUtilisateurs==0){
-			new UtilisateurManager().save((new Utilisateur("PAPOPE","PAPOPE")));
+			new UtilisateurManager(new CompteManager()).save((new Utilisateur("PAPOPE","PAPOPE")));
 		}
 	}
 
@@ -39,7 +36,7 @@ public class JpaTest {
 		RdvInfos rdvInfos = new RdvInfos(60,intitules);
 		createRdvInfos(rdvInfos);
 		prof.setRdvInfos(rdvInfos);
-		(new ProfessionnelManager()).save(prof);
+		(new ProfessionnelManager(new CompteManager())).save(prof);
 	}
 
 	private void createRdvInfos(RdvInfos rdvInfos) {
@@ -66,7 +63,7 @@ public class JpaTest {
 		}
 		tx.commit();
 
-		Professionnel prof = (new ProfessionnelManager().getProfessionnelById(4L));
+		Professionnel prof = (new ProfessionnelManager(new CompteManager()).getProfessionnelById(37L));
 		if(prof != null){
 			System.out.println(prof);
 		}
