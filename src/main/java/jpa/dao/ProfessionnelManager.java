@@ -25,10 +25,10 @@ public class ProfessionnelManager extends GenericManager<Professionnel,Long>
 
     public Professionnel getProfessionnelByName(String name){
         try {
-            String query = String.format("SELECT a FROM Compte a WHERE DTYPE=%s AND name=%s",
-                    Professionnel.class,
+            String query = String.format("SELECT a FROM Compte a WHERE DTYPE=%s AND name='%s'",
+                    Professionnel.class.getName(),
                     name);
-            return entityManager.createQuery(query, Professionnel.class).getSingleResult();
+            return (Professionnel) entityManager.createQuery(query, Compte.class).getSingleResult();
         }
         catch(NoResultException e){
             return null;

@@ -49,14 +49,16 @@ public class Professionnel extends Compte{
 
     @Override
     public String toString(){
-        return String.format("Profesionnel %s, Durée de RDV: %s\nMotifs de RDV %s\nCréneaux disponibles %s",
-                this.name,this.infoRdv.getDuree(),
+        if(this.getRdvInfos()==null) return String.format("Professionnel %s",this.getName());
+        return String.format("Profesionnel %s, Durée de RDV: %s\n%s\nCréneaux disponibles %s",
+                this.name,this.getRdvInfos().getDuree(),
                 IntiList(this.getRdvInfos().getIntitules()),
                 this.freeSlots
         );
     }
 
     private String IntiList(List<Intitule> intitules){
+        if(intitules==null) return "Aucun intitulé";
         String res = "Liste des intitulés:";
         for(Intitule intitule : intitules){
             res = String.format("%s\n%s",res,intitule.toString());

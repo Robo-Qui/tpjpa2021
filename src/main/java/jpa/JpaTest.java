@@ -2,6 +2,7 @@ package jpa;
 
 import jpa.business.*;
 import jpa.dao.*;
+import jpa.services.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -13,38 +14,11 @@ import java.util.List;
 public class JpaTest {
 
 	public EntityManager manager;
+	private UtilisateurService utilService;
+	private ProfessionnelService profService;
 
 	public JpaTest(EntityManager manager){
 		this.manager = manager;
-	}
-
-	public void createUtilisateur(){
-
-		String query = "Select a From Compte a Where DTYPE='Utilisateur'";
-		int numUtilisateurs = manager.createQuery(query, Compte.class).getResultList().size();
-		if(numUtilisateurs==0){
-			new UtilisateurManager(new CompteManager()).save((new Utilisateur("PAPOPE","PAPOPE")));
-		}
-	}
-
-	public void createProfessionnel(){
-		Professionnel prof = new Professionnel("prof","prof","Professionnel");
-		ArrayList<Intitule> intitules = new ArrayList<>();
-		Intitule intitule = new Intitule("Chirurgie Dentaire");
-		createIntitule(intitule);
-		intitules.add(intitule);
-		RdvInfos rdvInfos = new RdvInfos(60,intitules);
-		createRdvInfos(rdvInfos);
-		prof.setRdvInfos(rdvInfos);
-		(new ProfessionnelManager(new CompteManager())).save(prof);
-	}
-
-	private void createRdvInfos(RdvInfos rdvInfos) {
-		(new RdvInfosManager()).save(rdvInfos);
-	}
-
-	private void createIntitule(Intitule intitule) {
-		(new IntituleManager()).save(intitule);
 	}
 
 	/**
@@ -53,17 +27,19 @@ public class JpaTest {
 	public static void main(String[] args) {
 
 		JpaTest test = new JpaTest(EntityManagerHelper.getEntityManager());
+		test.profService = new ProfessionnelService(new ProfessionnelManager(new CompteManager()),new FreeSlotService(new FreeSlotManager()),new RdvInfosService(new RdvInfosManager(),new IntituleService(new IntituleManager())));
+		test.utilService = new UtilisateurService(new UtilisateurManager(new CompteManager()),test.profService,new RendezVousService(new RendezVousManager()));
 		EntityTransaction tx = test.manager.getTransaction();
 		tx.begin();
 		try {
-			test.createUtilisateur();
-			test.createProfessionnel();
+			test.utilService.addUtilisateur(new Utilisateur("PAPOPE","PAPOPE"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		tx.commit();
 
-		Professionnel prof = (new ProfessionnelManager(new CompteManager()).getProfessionnelById(37L));
+		Professionnel prof = test.profService.getByLogin("login");
+
 		if(prof != null){
 			System.out.println(prof);
 		}
